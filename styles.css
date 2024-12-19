@@ -31,6 +31,17 @@ main {
     padding: 20px;
 }
 
+#ingredients-list {
+    list-style-type: none; /* Remove bullet points */
+    padding-left: 0; /* Remove indentation */
+    margin: 10px 0; /* Optional: Adjust spacing */
+}
+
+#ingredients-list li {
+    margin: 5px 0; /* Optional: Add spacing between items */
+}
+
+
 #recipe {
     text-align: center;
 }
