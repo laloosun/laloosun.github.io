@@ -85,22 +85,44 @@ footer a:hover {
 
 /* Cookie Consent */
 #cookie-consent {
-    background-color: #333333;
-    color: #ffffff;
-    border-top: 2px solid #f4a261;
+    display: block;
+    background-color: #333333; /* Dark background for good contrast */
+    color: #ffffff; /* White text for readability */
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-top: 2px solid #f4a261; /* Optional: Add a top border for emphasis */
+}
+
+#cookie-consent p {
+    margin: 0 0 10px; /* Add spacing below the text */
+}
+
+#cookie-consent a {
+    color: #f4a261; /* Highlight links */
+    text-decoration: underline;
+}
+
+#cookie-consent a:hover {
+    color: #e76f51; /* Link hover color */
 }
 
 #cookie-consent button {
-    background-color: #f4a261;
-    color: #121212;
+    background-color: #f4a261; /* Button color */
+    color: #121212; /* Button text color */
     border: none;
-    padding: 5px 10px;
+    padding: 10px 15px;
+    margin: 0 5px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 5px; /* Rounded corners for buttons */
 }
 
 #cookie-consent button:hover {
-    background-color: #e76f51;
+    background-color: #e76f51; /* Button hover color */
 }
 
 /* Responsive Design */
