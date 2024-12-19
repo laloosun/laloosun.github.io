@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Dish: A single recipe every day!">
+    <link rel="stylesheet" href="styles.css">
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <title>Daily Dish - Recipe of the Day</title>
+
+    <!-- Matomo Tracking Script -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="https://your-matomo-instance.example.com/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', 'YOUR_SITE_ID']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+
+    <!-- GDPR Compliance Notice -->
+    <style>
+        #cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        #cookie-consent button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Daily Dish</h1>
+        <p>Your daily dose of delicious recipes!</p>
+    </header>
+
+    <main>
+        <section id="recipe">
+            <h2 id="recipe-title">Loading...</h2>
+            <img id="recipe-image" src="" alt="Recipe Image" style="max-width: 100%; height: auto; display: none;">
+            <p id="recipe-instructions">Please wait while we fetch today's recipe.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="privacy-policy.html">Privacy Policy</a></p>
+        <p>&copy; 2024 Daily Dish. All Rights Reserved.</p>
+    </footer>
+
+    <div id="cookie-consent">
+        <p>We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+        <button onclick="acceptCookies()">Accept</button>
+        <button onclick="rejectCookies()">Reject</button>
+    </div>
+
+    <script>
+        // Display GDPR Cookie Consent
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('cookieAccepted') && !localStorage.getItem('cookieRejected')) {
+                document.getElementById('cookie-consent').style.display = 'block';
+            }
+        });
+
+        function acceptCookies() {
+            localStorage.setItem('cookieAccepted', 'true');
+            document.getElementById('cookie-consent').style.display = 'none';
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookieRejected', 'true');
+            document.getElementById('cookie-consent').style.display = 'none';
+        }
+
+        // Fetch Recipe from TheMealDB
+        async function fetchRecipe() {
+            try {
+                const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+                const data = await response.json();
+                const recipe = data.meals[0];
+
+                document.getElementById('recipe-title').textContent = recipe.strMeal;
+                document.getElementById('recipe-image').src = recipe.strMealThumb;
+                document.getElementById('recipe-image').style.display = 'block';
+                document.getElementById('recipe-instructions').textContent = recipe.strInstructions;
+            } catch (error) {
+                document.getElementById('recipe-instructions').textContent = 'Sorry, we couldn\'t fetch today\'s recipe. Please try again later.';
+                console.error('Error fetching recipe:', error);
+            }
+        }
+
+        fetchRecipe();
+    </script>
+</body>
+</html>
