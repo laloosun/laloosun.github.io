@@ -50,6 +50,9 @@
         <section id="recipe">
             <h2 id="recipe-title">Loading...</h2>
             <img id="recipe-image" src="" alt="Recipe Image" style="max-width: 100%; height: auto; display: none;">
+            <h3>Ingredients</h3>
+            <ul id="ingredients-list"></ul>
+            <h3>Instructions</h3>
             <p id="recipe-instructions">Please wait while we fetch today's recipe.</p>
         </section>
     </main>
@@ -85,20 +88,38 @@
 
         // Fetch Recipe from TheMealDB
         async function fetchRecipe() {
-            try {
-                const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-                const data = await response.json();
-                const recipe = data.meals[0];
+    try {
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+        const data = await response.json();
+        const recipe = data.meals[0];
 
-                document.getElementById('recipe-title').textContent = recipe.strMeal;
-                document.getElementById('recipe-image').src = recipe.strMealThumb;
-                document.getElementById('recipe-image').style.display = 'block';
-                document.getElementById('recipe-instructions').textContent = recipe.strInstructions;
-            } catch (error) {
-                document.getElementById('recipe-instructions').textContent = 'Sorry, we couldn\'t fetch today\'s recipe. Please try again later.';
-                console.error('Error fetching recipe:', error);
+        // Set recipe title and image
+        document.getElementById('recipe-title').textContent = recipe.strMeal;
+        const recipeImage = document.getElementById('recipe-image');
+        recipeImage.src = recipe.strMealThumb;
+        recipeImage.style.display = 'block';
+
+        // Set recipe instructions
+        document.getElementById('recipe-instructions').textContent = recipe.strInstructions;
+
+        // Generate and display ingredients list
+        const ingredientsList = document.getElementById('ingredients-list');
+        ingredientsList.innerHTML = ''; // Clear previous content
+
+        for (let i = 1; i <= 20; i++) {
+            const ingredient = recipe[`strIngredient${i}`];
+            const measure = recipe[`strMeasure${i}`];
+            if (ingredient && ingredient.trim() !== '') {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${measure} ${ingredient}`;
+                ingredientsList.appendChild(listItem);
             }
         }
+    } catch (error) {
+        document.getElementById('recipe-instructions').textContent = 'Sorry, we couldn\'t fetch today\'s recipe. Please try again later.';
+        console.error('Error fetching recipe:', error);
+    }
+}
 
         fetchRecipe();
     </script>
