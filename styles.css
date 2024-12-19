@@ -45,6 +45,8 @@ main {
     max-width: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
+    display: block;
+    margin: 0 auto;
 }
 
 #recipe-instructions {
@@ -72,7 +74,7 @@ footer a:hover {
 
 /* Cookie Consent */
 #cookie-consent {
-    background-color: #1f1f1f;
+    background-color: #333333;
     color: #ffffff;
     border-top: 2px solid #f4a261;
 }
