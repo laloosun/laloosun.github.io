@@ -66,6 +66,7 @@ main {
     color: #ffffff;
 }
 
+
 /* Footer */
 footer {
     text-align: center;
@@ -84,10 +85,11 @@ footer a:hover {
 }
 
 /* Cookie Consent */
+
 #cookie-consent {
     display: block;
-    background-color: #333333; /* Dark background for good contrast */
-    color: #ffffff; /* White text for readability */
+    background-color: rgba(51, 51, 51, 0.75); /* 75% opacity */
+    color: #ffffff;
     padding: 15px;
     text-align: center;
     position: fixed;
@@ -95,7 +97,11 @@ footer a:hover {
     left: 0;
     width: 100%;
     z-index: 1000;
-    border-top: 2px solid #f4a261; /* Optional: Add a top border for emphasis */
+    border-top: 2px solid #f4a261;
+}
+
+#cookie-consent button {
+    margin: 0 5px;
 }
 
 #cookie-consent p {
@@ -124,6 +130,27 @@ footer a:hover {
 #cookie-consent button:hover {
     background-color: #e76f51; /* Button hover color */
 }
+
+a {
+    color: #4da6ff; /* Light blue color for better contrast */
+    text-decoration: underline; /* Keeps links underlined for clarity */
+    cursor: pointer; /* Ensures links show the pointer cursor */
+}
+
+a:visited {
+    color: #3399cc; /* Slightly darker blue for visited links */
+}
+
+a:hover {
+    color: #80c1ff; /* Even lighter blue on hover */
+    text-decoration: none; /* Optional: Remove underline on hover */
+}
+
+a:focus {
+    outline: 2px solid #4da6ff; /* Focus outline for accessibility */
+    outline-offset: 2px;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
