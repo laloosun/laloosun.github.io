@@ -8,12 +8,16 @@
     <a href="privacy-policy.html">Privacy Policy</a>
     <title>Daily Dish - Recipe of the Day</title>
 
-    <!-- Matomo Tracking Script -->
+    <!-- Matomo Tracking Script (Updated for Privacy) -->
 <script>
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
+  _paq.push(['disableCookies']);
+  _paq.push(['setAnonymizeIp', true]);
+  _paq.push(['deleteCustomVariables', 'page']); // No custom variables stored
+
   (function() {
     var u="https://laura.matomo.cloud/";
     _paq.push(['setTrackerUrl', u+'matomo.php']);
@@ -48,9 +52,10 @@
     </footer>
 
     <div id="cookie-consent">
-        <p>We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+        <p>Daily Dish doesn't use third-party cookies - only a single in-house cookie.</p>
+        <p>No data is sent to a third party. By continuing, you help us improve your experience in a privacy-friendly way. You can also <a href="privacy-policy.html">view our Privacy Policy</a>.</p>
         <button onclick="acceptCookies()">Accept</button>
-        <button onclick="rejectCookies()">Reject</button>
+        <button onclick="rejectCookies()">Decline</button>
     </div>
 
     <script>
