@@ -31,6 +31,28 @@ main {
     padding: 20px;
 }
 
+/* Style for the refresh recipe button */
+#refresh-recipe-btn {
+    background-color: #4caf50; /* Pleasant green color */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 12px 20px; /* Good size */
+    font-size: 1rem; /* Font size */
+    font-weight: bold; /* Bold text */
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer;
+    margin-bottom: 20px; /* Space below the button */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+#refresh-recipe-btn:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+#refresh-recipe-btn:focus {
+    outline: none; /* Remove default focus outline */
+}
+
 #ingredients-list {
     list-style-type: none; /* Remove bullet points */
     padding-left: 0; /* Remove indentation */
