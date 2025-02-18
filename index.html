@@ -31,6 +31,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <main>
         <section id="recipe">
+            <!-- Button to refresh the recipe -->
+<button id="refresh-recipe-btn">Refresh Recipe</button>
+
             <h2 id="recipe-title">Loading...</h2>
             <img id="recipe-image" src="" alt="Recipe Image" style="max-width: 100%; height: auto; display: none;">
             <h3>Ingredients</h3>
@@ -106,6 +109,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 
         fetchRecipe();
+
+               // Refresh recipe on button click
+        document.getElementById('refresh-recipe-btn').addEventListener('click', function() {
+            fetchRecipe();
+        });
     </script>
 </body>
 </html>
