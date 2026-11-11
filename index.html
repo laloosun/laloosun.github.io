@@ -1,109 +1,469 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Daily Dish: A single recipe every day!" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Daily Dish - Recipe of the Day</title>
-  </head>
-  <body>
-    <header>
-      <h1>Daily Dish</h1>
-      <p>Your daily dose of delicious recipes!</p>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Daily Dish: A single recipe every day!"
+  />
 
-    <main>
-      <section id="recipe">
-        <!-- Button to refresh the recipe -->
-        <button id="refresh-recipe-btn">Refresh Recipe</button>
+  <link rel="stylesheet" href="styles.css" />
+  <title>Daily Dish - Recipe of the Day</title>
 
-        <h2 id="recipe-title">Loading...</h2>
-        <img
-          id="recipe-image"
-          src=""
-          alt="Recipe Image"
-          style="max-width: 100%; height: auto; display: none"
-        />
-        <h3>Ingredients</h3>
-        <ul id="ingredients-list"></ul>
-        <h3>Instructions</h3>
-        <p id="recipe-instructions">
-          Please wait while we fetch today's recipe.
-        </p>
-      </section>
-    </main>
+  <!-- Matomo Cloud tracking -->
+  <script>
+    var _paq = window._paq = window._paq || [];
 
-    <footer>
-      <p>
-        If you found this useful and want to support hosting costs, you can
-        donate:
+    // Improve visit duration measurement on single-page visits.
+    _paq.push(['enableHeartBeatTimer', 15]);
+
+    // Standard pageview and link tracking.
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+
+    (function () {
+      var u = "https://laura.matomo.cloud/";
+
+      _paq.push(['setTrackerUrl', u + 'matomo.php']);
+      _paq.push(['setSiteId', '3']);
+
+      var d = document;
+      var g = d.createElement('script');
+      var s = d.getElementsByTagName('script')[0];
+
+      g.async = true;
+      g.src = "https://cdn.matomo.cloud/laura.matomo.cloud/matomo.js";
+
+      s.parentNode.insertBefore(g, s);
+    })();
+  </script>
+  <!-- End Matomo Cloud tracking -->
+</head>
+
+<body>
+
+  <header>
+    <h1>Daily Dish</h1>
+    <p>Your daily dose of delicious recipes!</p>
+  </header>
+
+  <main>
+    <section id="recipe">
+
+      <button id="refresh-recipe-btn" type="button">
+        Refresh Recipe
+      </button>
+
+      <h2 id="recipe-title">Loading...</h2>
+
+      <img
+        id="recipe-image"
+        src=""
+        alt="Recipe Image"
+        style="max-width: 100%; height: auto; display: none"
+      />
+
+      <h3>Ingredients</h3>
+      <ul id="ingredients-list"></ul>
+
+      <h3>Instructions</h3>
+      <p id="recipe-instructions">
+        Please wait while we fetch today's recipe.
       </p>
-      <p>
-        <!-- Replace YOUR_PAYPAL_LINK_HERE with your real PayPal donate URL -->
- <form action="https://www.paypal.com/donate" method="post" target="_top">
-<input type="hidden" name="hosted_button_id" value="ASS4DZJ25ZWLG" />
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-<img alt="" border="0" src="https://www.paypal.com/en_ES/i/scr/pixel.gif" width="1" height="1" />
-</form>
-      </p>
-<p>&copy; <span id="year"></span> Daily Dish. All Rights Reserved.</p>
-    </footer>
 
-    <script>
-      // Fetch Recipe from TheMealDB
-      async function fetchRecipe() {
-        try {
-          const response = await fetch(
-            "https://www.themealdb.com/api/json/v1/1/random.php"
-          );
-          const data = await response.json();
-          const recipe = data.meals[0];
+    </section>
+  </main>
 
-          // Set recipe title and image
-          document.getElementById("recipe-title").textContent = recipe.strMeal;
-          const recipeImage = document.getElementById("recipe-image");
-          recipeImage.src = recipe.strMealThumb;
-          recipeImage.style.display = "block";
+  <footer>
+    <p>
+      If you found this useful and want to support hosting costs,
+      you can donate:
+    </p>
 
-          // Set recipe instructions
-          document.getElementById("recipe-instructions").textContent =
-            recipe.strInstructions;
+    <form
+      action="https://www.paypal.com/donate"
+      method="post"
+      target="_top"
+    >
+      <input
+        type="hidden"
+        name="hosted_button_id"
+        value="ASS4DZJ25ZWLG"
+      />
 
-          // Generate and display ingredients list
-          const ingredientsList = document.getElementById("ingredients-list");
-          ingredientsList.innerHTML = ""; // Clear previous content
+      <input
+        type="image"
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
+        name="submit"
+        title="PayPal - The safer, easier way to pay online!"
+        alt="Donate with PayPal"
+      />
 
-          for (let i = 1; i <= 20; i++) {
-            const ingredient = recipe["strIngredient" + i];
-            const measure = recipe["strMeasure" + i];
-            if (ingredient && ingredient.trim() !== "") {
-              const listItem = document.createElement("li");
-              listItem.textContent =
-                (measure ? measure : "") + " " + ingredient;
-              ingredientsList.appendChild(listItem);
-            }
-          }
-        } catch (error) {
-          document.getElementById("recipe-instructions").textContent =
-            "Sorry, we couldn't fetch today's recipe. Please try again later.";
-          console.error("Error fetching recipe:", error);
-        }
+      <img
+        alt=""
+        src="https://www.paypal.com/en_ES/i/scr/pixel.gif"
+        width="1"
+        height="1"
+      />
+    </form>
+
+    <p>
+      &copy; <span id="year"></span>
+      Daily Dish. All Rights Reserved.
+    </p>
+  </footer>
+
+  <script>
+    /*
+     * DAILY DISH
+     * Recipe functionality and engagement tracking
+     */
+
+    const paq = window._paq = window._paq || [];
+
+    /*
+     * Helper for sending Matomo events.
+     *
+     * Category: Engagement, Recipe, etc.
+     * Action: Scroll Depth, Refresh, Active Time, etc.
+     * Name: 25%, Click, 10s, etc.
+     * Value: Optional numeric value.
+     */
+    function trackEvent(category, action, name, value) {
+      const args = ['trackEvent', category, action, name];
+
+      if (typeof value === 'number') {
+        args.push(value);
       }
 
-      // Fetch initial recipe
+      paq.push(args);
+
+      console.log(
+        '[Matomo Lab]',
+        category,
+        action,
+        name,
+        value ?? ''
+      );
+    }
+
+    /*
+     * 1. RECIPE LOADING
+     *
+     * Tracks successful and failed recipe requests.
+     */
+    async function fetchRecipe() {
+      try {
+        const response = await fetch(
+          'https://www.themealdb.com/api/json/v1/1/random.php'
+        );
+
+        if (!response.ok) {
+          throw new Error('Recipe API returned ' + response.status);
+        }
+
+        const data = await response.json();
+        const recipe = data.meals && data.meals[0];
+
+        if (!recipe) {
+          throw new Error('No recipe returned');
+        }
+
+        // Recipe title
+        document.getElementById('recipe-title').textContent =
+          recipe.strMeal;
+
+        // Recipe image
+        const recipeImage =
+          document.getElementById('recipe-image');
+
+        recipeImage.src = recipe.strMealThumb;
+        recipeImage.alt = recipe.strMeal;
+        recipeImage.style.display = 'block';
+
+        // Instructions
+        document.getElementById(
+          'recipe-instructions'
+        ).textContent = recipe.strInstructions;
+
+        // Ingredients
+        const ingredientsList =
+          document.getElementById('ingredients-list');
+
+        ingredientsList.innerHTML = '';
+
+        for (let i = 1; i <= 20; i++) {
+          const ingredient =
+            recipe['strIngredient' + i];
+
+          const measure =
+            recipe['strMeasure' + i];
+
+          if (ingredient && ingredient.trim() !== '') {
+            const listItem =
+              document.createElement('li');
+
+            listItem.textContent =
+              (measure || '') + ' ' + ingredient;
+
+            ingredientsList.appendChild(listItem);
+          }
+        }
+
+        trackEvent('Recipe', 'Load', 'Success');
+
+      } catch (error) {
+        document.getElementById(
+          'recipe-instructions'
+        ).textContent =
+          "Sorry, we couldn't fetch today's recipe. " +
+          "Please try again later.";
+
+        console.error('Error fetching recipe:', error);
+
+        trackEvent('Recipe', 'Load', 'Error');
+      }
+    }
+
+    /*
+     * 2. RECIPE REFRESH BUTTON
+     *
+     * Tracks explicit clicks.
+     */
+    const refreshButton =
+      document.getElementById('refresh-recipe-btn');
+
+    refreshButton.addEventListener('click', function () {
+      trackEvent('Recipe', 'Refresh', 'Click');
       fetchRecipe();
+    });
 
-      // Refresh recipe on button click
-      document
-        .getElementById("refresh-recipe-btn")
-        .addEventListener("click", function () {
-          fetchRecipe();
-        });
-    </script>
-    <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+    /*
+     * 3. SCROLL DEPTH
+     *
+     * One event per milestone per page load:
+     * 25%, 50%, 75%, 100%.
+     */
+    const reachedScroll = new Set();
 
-  </body>
+    function checkScrollDepth() {
+      const doc = document.documentElement;
+
+      const scrollableHeight =
+        doc.scrollHeight - window.innerHeight;
+
+      if (scrollableHeight <= 0) {
+        return;
+      }
+
+      const scrollPercent = Math.min(
+        100,
+        Math.round(
+          (window.scrollY / scrollableHeight) * 100
+        )
+      );
+
+      for (const milestone of [25, 50, 75, 100]) {
+        if (
+          scrollPercent >= milestone &&
+          !reachedScroll.has(milestone)
+        ) {
+          reachedScroll.add(milestone);
+
+          trackEvent(
+            'Engagement',
+            'Scroll Depth',
+            milestone + '%',
+            milestone
+          );
+        }
+      }
+    }
+
+    window.addEventListener(
+      'scroll',
+      checkScrollDepth,
+      { passive: true }
+    );
+
+    /*
+     * 4. ACTIVE ENGAGEMENT TIME
+     *
+     * Counts time when:
+     * - The page is visible.
+     * - Interaction occurred in the last 30 seconds.
+     *
+     * Reports milestones at:
+     * 10, 30, 60, 120 seconds.
+     *
+     * This is an approximation, not proof of
+     * a human visitor.
+     */
+    let activeSeconds = 0;
+    let lastInteraction = Date.now();
+
+    const reachedActiveTime = new Set();
+
+    function markInteraction() {
+      lastInteraction = Date.now();
+    }
+
+    [
+      'pointerdown',
+      'keydown',
+      'scroll',
+      'touchstart'
+    ].forEach(function (type) {
+      window.addEventListener(
+        type,
+        markInteraction,
+        { passive: true }
+      );
+    });
+
+    setInterval(function () {
+      const pageVisible =
+        document.visibilityState === 'visible';
+
+      const recentlyActive =
+        Date.now() - lastInteraction < 30000;
+
+      if (!pageVisible || !recentlyActive) {
+        return;
+      }
+
+      activeSeconds++;
+
+      for (const milestone of [10, 30, 60, 120]) {
+        if (
+          activeSeconds >= milestone &&
+          !reachedActiveTime.has(milestone)
+        ) {
+          reachedActiveTime.add(milestone);
+
+          trackEvent(
+            'Engagement',
+            'Active Time',
+            milestone + 's',
+            milestone
+          );
+        }
+      }
+    }, 1000);
+
+    /*
+     * 5. TAB VISIBILITY
+     *
+     * Tracks when the page becomes hidden.
+     * This event is best-effort because browsers
+     * may cancel requests during navigation.
+     */
+    let hiddenReported = false;
+
+    document.addEventListener(
+      'visibilitychange',
+      function () {
+        if (
+          document.visibilityState === 'hidden' &&
+          !hiddenReported
+        ) {
+          hiddenReported = true;
+
+          trackEvent(
+            'Engagement',
+            'Visibility',
+            'Hidden'
+          );
+        }
+
+        if (document.visibilityState === 'visible') {
+          hiddenReported = false;
+        }
+      }
+    );
+
+    /*
+     * 6. RECIPE READING
+     *
+     * Tracks whether at least half of the
+     * recipe section remains visible for
+     * approximately 10 seconds.
+     *
+     * This measures exposure, not actual reading.
+     */
+    const recipeSection =
+      document.getElementById('recipe');
+
+    if (
+      recipeSection &&
+      'IntersectionObserver' in window
+    ) {
+      let recipeVisible = false;
+      let readingSeconds = 0;
+      let readingReported = false;
+
+      const recipeObserver =
+        new IntersectionObserver(
+          function (entries) {
+            recipeVisible =
+              entries[0].intersectionRatio >= 0.5;
+          },
+          {
+            threshold: [0, 0.5, 1]
+          }
+        );
+
+      recipeObserver.observe(recipeSection);
+
+      setInterval(function () {
+        if (
+          readingReported ||
+          !recipeVisible ||
+          document.visibilityState !== 'visible'
+        ) {
+          return;
+        }
+
+        readingSeconds++;
+
+        if (readingSeconds >= 10) {
+          readingReported = true;
+
+          trackEvent(
+            'Engagement',
+            'Recipe Reading',
+            '10s'
+          );
+        }
+      }, 1000);
+    }
+
+    /*
+     * 7. OUTBOUND LINK TRACKING
+     *
+     * Already handled by Matomo:
+     *
+     * _paq.push(['enableLinkTracking']);
+     *
+     * No extra click handler is necessary.
+     */
+
+    /*
+     * 8. INITIALIZE PAGE
+     */
+    document.getElementById('year').textContent =
+      new Date().getFullYear();
+
+    fetchRecipe();
+
+    console.log(
+      '[Matomo Lab] Engagement tracking initialized'
+    );
+  </script>
+
+</body>
 </html>
+
+
